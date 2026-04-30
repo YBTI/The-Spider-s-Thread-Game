@@ -1,0 +1,4 @@
+venv/
+remove_bg.py
+.DS_Store
+node_modules/
