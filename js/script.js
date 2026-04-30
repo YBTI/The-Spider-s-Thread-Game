@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const progressFill = document.getElementById("progress-fill");
     const feedbackOverlay = document.getElementById("feedback-overlay");
     const feedbackText = document.getElementById("feedback-text");
+    const resultButtons = document.getElementById("result-buttons");
+    const retryBtn = document.getElementById("retry-btn");
+    const homeBtn = document.getElementById("home-btn");
 
     // Game State
     let activeQuizData = [];
@@ -40,6 +43,38 @@ document.addEventListener("DOMContentLoaded", () => {
             startGame(stage);
         });
     });
+
+    retryBtn.addEventListener("click", () => {
+        resetGameVisuals();
+        initGame();
+    });
+
+    homeBtn.addEventListener("click", () => {
+        resetGameVisuals();
+        showStartScreen();
+    });
+
+    function showStartScreen() {
+        startScreen.classList.remove("hidden");
+        gameHeader.style.display = "none";
+        quizSection.style.display = "none";
+        gameFooter.style.display = "none";
+    }
+
+    function resetGameVisuals() {
+        // クラスのリセット
+        const thread = document.getElementById("light-thread");
+        thread.className = ""; 
+        const player = document.getElementById("player-character");
+        player.classList.remove("falling");
+        
+        // オーバーレイのリセット
+        feedbackOverlay.classList.add("hidden");
+        feedbackOverlay.style.background = ""; 
+        resultButtons.classList.add("hidden");
+        feedbackText.style.textShadow = "";
+        feedbackText.innerHTML = "";
+    }
 
     function startGame(stage) {
         startScreen.classList.add("hidden");
@@ -299,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
             feedbackOverlay.style.background = "rgba(0, 0, 0, 1)";
             feedbackText.innerHTML = "GAME OVER<br><span style='font-size: 1.5rem; color: #aaa'>糸はプツリと切れてしまった...</span>";
             feedbackText.className = "feedback-wrong";
+            resultButtons.classList.remove("hidden");
         }, 1500);
     }
 
@@ -312,6 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackText.innerHTML = "HEAVEN<br><span style='font-size: 1.5rem; color: #d4af37'>神の光に救済されました</span>";
         feedbackText.className = "feedback-correct";
         feedbackText.style.textShadow = "0 0 10px rgba(212,175,55,0.8)";
+        resultButtons.classList.remove("hidden");
     }
 
     // 初期状態はスタート画面を待機

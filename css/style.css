@@ -230,6 +230,21 @@ body {
     color: var(--color-gold-hover);
 }
 
+#result-buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    max-width: 300px;
+    z-index: 60;
+    pointer-events: auto;
+}
+
+#result-buttons.hidden {
+    display: none !important;
+}
+
 /* ヘッダー周り */
 #game-header {
     position: relative;
