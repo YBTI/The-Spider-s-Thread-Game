@@ -1,4 +1,4 @@
-const quizData = [
+window.quizData = [
     { question: "旧約聖書の最初の書物はどれ？", choices: ["創世記", "出エジプト記", "箴言", "黙示録"], answer: 0 },
     { question: "イエス・キリストが誕生したとされる町はどこ？", choices: ["エルサレム", "ベツレヘム", "ナザレ", "ガリラヤ"], answer: 1 },
     { question: "ノアの方舟に乗った動物は各種類何番ずつ？", choices: ["1匹", "7つがい（14匹）", "1つがい（2匹）", "指定はなかった"], answer: 2 },
@@ -51,7 +51,7 @@ const quizData = [
     { question: "ヨハネの黙示録に登場する「獣の数字」として有名な数字は？", choices: ["333", "666", "777", "144000"], answer: 1 }
 ];
 
-const spiritQuizData = [
+window.spiritQuizData = [
     { question: "？？？に入る言葉は？「地上のことも天のことも？？？あなたの希望、永遠だろう。」", choices: ["実践してこそ", "愛してこそ", "走ってこそ", "信じてこそ"], answer: 2 },
     { question: "？？？に入る言葉は？「御言葉が？？？宝だ。」", choices: ["信仰の", "永遠な", "実践の", "引き上げの"], answer: 1 },
     { question: "？？？に入る言葉は？「あなたたちも早くつくりなさい。つくっておいてこそ、美しく神秘的で？？？だ。」 ", choices: ["最高", "傑作品", "貴重", "奇異"], answer: 3 },
@@ -73,7 +73,7 @@ const spiritQuizData = [
     { question: "？？？に入る言葉は？「すぐに？？？をして、教役者が管理し、専門家が管理するようにしなさい。」 ", choices: ["パス", "把握", "証", "教育"], answer: 0 }
 ];
 
-const galaxyQuizData = [
+window.galaxyQuizData = [
     { question: "Galaxyに関する問題1 (準備中)", choices: ["選択肢A", "選択肢B", "選択肢C", "選択肢D"], answer: 0 },
     { question: "Galaxyに関する問題2 (準備中)", choices: ["選択肢A", "選択肢B", "選択肢C", "選択肢D"], answer: 1 }
 ];

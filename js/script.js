@@ -111,11 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
         gameFooter.style.display = "flex";
 
         if (stage === "bible") {
-            activeQuizData = [...quizData];
+            activeQuizData = [...window.quizData];
         } else if (stage === "spirit") {
-            activeQuizData = [...spiritQuizData];
+            activeQuizData = [...window.spiritQuizData];
         } else if (stage === "galaxy") {
-            activeQuizData = [...galaxyQuizData];
+            activeQuizData = [...window.galaxyQuizData];
         }
 
         initGame();
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearCreatorInputs();
     });
 
-    registerBtn.addEventListener("click", () => {
+    registerBtn.addEventListener("click", async () => {
         const text = newQText.value.trim();
         const a = newQA.value.trim();
         const b = newQB.value.trim();
@@ -153,9 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // 配列に追加
-        if (genre === "bible") quizData.push(newQuestion);
-        else if (genre === "spirit") spiritQuizData.push(newQuestion);
-        else if (genre === "galaxy") galaxyQuizData.push(newQuestion);
+        if (genre === "bible") window.quizData.push(newQuestion);
+        else if (genre === "spirit") window.spiritQuizData.push(newQuestion);
+        else if (genre === "galaxy") window.galaxyQuizData.push(newQuestion);
 
         // Firestore に保存
         try {
@@ -184,9 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const querySnapshot = await getDocs(collection(db, "questions"));
             querySnapshot.forEach((doc) => {
                 const q = doc.data();
-                if (q.genre === "bible") quizData.push(q);
-                else if (q.genre === "spirit") spiritQuizData.push(q);
-                else if (q.genre === "galaxy") galaxyQuizData.push(q);
+                if (q.genre === "bible") window.quizData.push(q);
+                else if (q.genre === "spirit") window.spiritQuizData.push(q);
+                else if (q.genre === "galaxy") window.galaxyQuizData.push(q);
             });
             console.log("Firebase から問題を読み込みました。");
         } catch (e) {
