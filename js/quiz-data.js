@@ -72,3 +72,8 @@ const spiritQuizData = [
     { question: "？？？に入る言葉は？「？？？を開けて世の中を見なさい。言葉と存在が見た目にはいい世界だ。」 ", choices: ["仕事", "心の窓", "自分の考え", "古い考え"], answer: 1 },
     { question: "？？？に入る言葉は？「すぐに？？？をして、教役者が管理し、専門家が管理するようにしなさい。」 ", choices: ["パス", "把握", "証", "教育"], answer: 0 }
 ];
+
+const galaxyQuizData = [
+    { question: "Galaxyに関する問題1 (準備中)", choices: ["選択肢A", "選択肢B", "選択肢C", "選択肢D"], answer: 0 },
+    { question: "Galaxyに関する問題2 (準備中)", choices: ["選択肢A", "選択肢B", "選択肢C", "選択肢D"], answer: 1 }
+];

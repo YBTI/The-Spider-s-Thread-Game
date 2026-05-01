@@ -16,8 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const retryBtn = document.getElementById("retry-btn");
     const homeBtn = document.getElementById("home-btn");
 
+    const creatorScreen = document.getElementById("creator-screen");
+    const openCreatorBtn = document.getElementById("open-creator-btn");
+    const registerBtn = document.getElementById("register-q-btn");
+    const backToHomeBtn = document.getElementById("back-to-home-btn");
+
+    const newQText = document.getElementById("new-q-text");
+    const newQA = document.getElementById("new-q-a");
+    const newQB = document.getElementById("new-q-b");
+    const newQC = document.getElementById("new-q-c");
+    const newQD = document.getElementById("new-q-d");
+    const newQGenre = document.getElementById("new-q-genre");
+
     // Game State
     let activeQuizData = [];
+    loadCustomQuestions();
     let currentQuestions = [];
     let currentQuestionIndex = 0;
     let altitude = 0; // 高度
@@ -86,9 +99,75 @@ document.addEventListener("DOMContentLoaded", () => {
             activeQuizData = [...quizData];
         } else if (stage === "spirit") {
             activeQuizData = [...spiritQuizData];
+        } else if (stage === "galaxy") {
+            activeQuizData = [...galaxyQuizData];
         }
 
         initGame();
+    }
+
+    // Creator Logic
+    openCreatorBtn.addEventListener("click", () => {
+        creatorScreen.classList.remove("hidden");
+    });
+
+    backToHomeBtn.addEventListener("click", () => {
+        creatorScreen.classList.add("hidden");
+        clearCreatorInputs();
+    });
+
+    registerBtn.addEventListener("click", () => {
+        const text = newQText.value.trim();
+        const a = newQA.value.trim();
+        const b = newQB.value.trim();
+        const c = newQC.value.trim();
+        const d = newQD.value.trim();
+        const correct = document.querySelector('input[name="correct-ans"]:checked').value;
+        const genre = newQGenre.value;
+
+        if (!text || !a || !b || !c || !d) {
+            alert("全ての項目を入力してください。");
+            return;
+        }
+
+        const newQuestion = {
+            question: text,
+            choices: [a, b, c, d],
+            answer: parseInt(correct, 10),
+            genre: genre
+        };
+
+        // 配列に追加
+        if (genre === "bible") quizData.push(newQuestion);
+        else if (genre === "spirit") spiritQuizData.push(newQuestion);
+        else if (genre === "galaxy") galaxyQuizData.push(newQuestion);
+
+        // localStorage に保存
+        const customQs = JSON.parse(localStorage.getItem('customQuestions') || '[]');
+        customQs.push(newQuestion);
+        localStorage.setItem('customQuestions', JSON.stringify(customQs));
+
+        alert("登録しました！");
+        creatorScreen.classList.add("hidden");
+        clearCreatorInputs();
+    });
+
+    function clearCreatorInputs() {
+        newQText.value = "";
+        newQA.value = "";
+        newQB.value = "";
+        newQC.value = "";
+        newQD.value = "";
+        document.getElementById("ans0").checked = true;
+    }
+
+    function loadCustomQuestions() {
+        const customQs = JSON.parse(localStorage.getItem('customQuestions') || '[]');
+        customQs.forEach(q => {
+            if (q.genre === "bible") quizData.push(q);
+            else if (q.genre === "spirit") spiritQuizData.push(q);
+            else if (q.genre === "galaxy") galaxyQuizData.push(q);
+        });
     }
 
     // Initialize Game

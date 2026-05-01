@@ -29,6 +29,47 @@
             <div class="stage-buttons">
                 <button class="stage-btn" data-stage="bible">聖書</button>
                 <button class="stage-btn" data-stage="spirit">聖霊の経緯</button>
+                <button class="stage-btn" data-stage="galaxy">Galaxy</button>
+                <button id="open-creator-btn" class="stage-btn" style="border-color: #4a90e2; margin-top: 10px;">問題を作る</button>
+            </div>
+        </div>
+
+        <!-- 問題作成画面 -->
+        <div id="creator-screen" class="hidden">
+            <div class="glass-panel creator-panel">
+                <h2 id="creator-title">問題を作成する</h2>
+                <div class="input-group">
+                    <label>問題文</label>
+                    <textarea id="new-q-text" placeholder="問題を入力してください"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>選択肢 (A〜D)</label>
+                    <input type="text" id="new-q-a" placeholder="選択肢 A">
+                    <input type="text" id="new-q-b" placeholder="選択肢 B">
+                    <input type="text" id="new-q-c" placeholder="選択肢 C">
+                    <input type="text" id="new-q-d" placeholder="選択肢 D">
+                </div>
+                <div class="input-group">
+                    <label>正解を選択</label>
+                    <div class="answer-tabs">
+                        <input type="radio" name="correct-ans" value="0" id="ans0" checked><label for="ans0">A</label>
+                        <input type="radio" name="correct-ans" value="1" id="ans1"><label for="ans1">B</label>
+                        <input type="radio" name="correct-ans" value="2" id="ans2"><label for="ans2">C</label>
+                        <input type="radio" name="correct-ans" value="3" id="ans3"><label for="ans3">D</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>ジャンル</label>
+                    <select id="new-q-genre">
+                        <option value="bible">聖書</option>
+                        <option value="spirit">聖霊の経緯</option>
+                        <option value="galaxy">Galaxy</option>
+                    </select>
+                </div>
+                <div class="creator-buttons">
+                    <button id="register-q-btn" class="stage-btn">登録する</button>
+                    <button id="back-to-home-btn" class="stage-btn">キャンセル</button>
+                </div>
             </div>
         </div>
 
