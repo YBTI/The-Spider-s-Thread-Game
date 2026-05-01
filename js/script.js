@@ -1,3 +1,18 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJPec8wnNGvp631GmngcWAkDaaWZeAYv4",
+  authDomain: "salvation-thread-game.firebaseapp.com",
+  projectId: "salvation-thread-game",
+  storageBucket: "salvation-thread-game.firebasestorage.app",
+  messagingSenderId: "123421337758",
+  appId: "1:123421337758:web:c96044415f5355a302b38f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const startScreen = document.getElementById("start-screen");
@@ -142,12 +157,15 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (genre === "spirit") spiritQuizData.push(newQuestion);
         else if (genre === "galaxy") galaxyQuizData.push(newQuestion);
 
-        // localStorage に保存
-        const customQs = JSON.parse(localStorage.getItem('customQuestions') || '[]');
-        customQs.push(newQuestion);
-        localStorage.setItem('customQuestions', JSON.stringify(customQs));
+        // Firestore に保存
+        try {
+            await addDoc(collection(db, "questions"), newQuestion);
+            alert("登録しました！クラウドに保存されました。");
+        } catch (e) {
+            console.error("Error adding document: ", e);
+            alert("保存に失敗しました。");
+        }
 
-        alert("登録しました！");
         creatorScreen.classList.add("hidden");
         clearCreatorInputs();
     });
@@ -161,13 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("ans0").checked = true;
     }
 
-    function loadCustomQuestions() {
-        const customQs = JSON.parse(localStorage.getItem('customQuestions') || '[]');
-        customQs.forEach(q => {
-            if (q.genre === "bible") quizData.push(q);
-            else if (q.genre === "spirit") spiritQuizData.push(q);
-            else if (q.genre === "galaxy") galaxyQuizData.push(q);
-        });
+    async function loadCustomQuestions() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "questions"));
+            querySnapshot.forEach((doc) => {
+                const q = doc.data();
+                if (q.genre === "bible") quizData.push(q);
+                else if (q.genre === "spirit") spiritQuizData.push(q);
+                else if (q.genre === "galaxy") galaxyQuizData.push(q);
+            });
+            console.log("Firebase から問題を読み込みました。");
+        } catch (e) {
+            console.error("Error loading documents: ", e);
+        }
     }
 
     // Initialize Game
