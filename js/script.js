@@ -124,10 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Creator Logic
     openCreatorBtn.addEventListener("click", () => {
         creatorScreen.classList.remove("hidden");
+        startScreen.classList.add("hidden");
     });
 
     backToHomeBtn.addEventListener("click", () => {
         creatorScreen.classList.add("hidden");
+        showStartScreen();
         clearCreatorInputs();
     });
 
